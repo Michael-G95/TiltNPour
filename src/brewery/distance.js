@@ -1,11 +1,10 @@
 function getDistance(coords1, coords2) {
-    
-    if(coords1.lon == 0 || coords1.lat==0){
+
+    if(coords1.lon === 0 || coords1.lat === 0){
         // User location didnt load
-        //TODO: improve this
+        //TODO: improve this?
         return 0;
-    } 
-    debugger
+    }
     const lat1 = coords1.lat;
     const lat2 = coords2.lat;
     const lon1 = coords1.lon;

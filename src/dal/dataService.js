@@ -12,11 +12,11 @@ export  function getBreweryData(){
                 distributors:[
                     {
                         name:"Michael",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     },
                     {
                         name:"A Distributor",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     }
                 ]
             },
@@ -31,11 +31,11 @@ export  function getBreweryData(){
                 distributors:[
                     {
                         name:"Geoff",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     },
                     {
                         name:"A Distributor",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     }
                 ]
             },
@@ -50,11 +50,11 @@ export  function getBreweryData(){
                 distributors:[
                     {
                         name:"Steven",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     },
                     {
                         name:"A Distributor",
-                        contact:"test@test.com"
+                        contact1:"test@test.com"
                     }
                 ]
             },

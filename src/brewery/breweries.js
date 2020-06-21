@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
 import Map from './map/map'
-import dataService from './dal/dataService'
+import dataService from '../dal/dataService'
 import Selector from './selector/selector';
-import logger from './dal/logger';
-import ErrorPanel from './errorPanel';
+import logger from '../dal/logger';
+import ErrorPanel from '../errorPanel';
 import Distributors from './distributors/distributors';
 
 
-function App() {
+function Breweries() {
 
   let [breweryData, setBreweryData] = useState([]);
   let [error, setError] = useState(false);
@@ -95,4 +95,4 @@ function App() {
   );
 }
 
-export default App;
+export default Breweries;

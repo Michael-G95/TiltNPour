@@ -1,7 +1,7 @@
 import React from 'react';
-import { GMAPS_API_KEY } from '../dal/constants';
-import logger from '../dal/logger';
-import ErrorPanel from '../errorPanel';
+import { GMAPS_API_KEY } from '../../dal/env';
+import logger from '../../dal/logger';
+import ErrorPanel from '../../errorPanel';
 function Map(props) {
     // Expects prop 'brewery' containing data
 

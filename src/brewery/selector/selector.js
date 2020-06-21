@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import Brewery from './brewery';
 import Search from './search';
-import getDistance from './distance';
+import getDistance from '../distance';
 
 function Selector(props) {
     let [userloc,setUserLoc]=useState({lat:0,lon:0});
-    if(navigator.geolocation && userloc.lat == 0){
+    if(navigator.geolocation && userloc.lat === 0 && userloc.lon === 0){
         navigator.geolocation.getCurrentPosition(p=>{
-            debugger
             setUserLoc({
                 lat:p.coords.latitude,
                 lon:p.coords.longitude

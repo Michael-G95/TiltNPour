@@ -5,8 +5,10 @@ function Distributors(props) {
     const distributors = props.distributors.map(d => {
         return (
             <li key={d.id} className="list-group-item text-center">
-                {d.name} <br />
-                {d.contact}
+                {d.name ? <>{d.name}<br /></> :""} 
+                {d.contact1 ? <>{d.contact1}<br /></> :""}
+                {d.contact2 ? <>{d.contact2}<br /></> :""}
+                {d.address ? <>{d.address}<br /></> :""}
             </li>
         )
     })
