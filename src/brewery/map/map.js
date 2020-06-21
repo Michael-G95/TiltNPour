@@ -23,12 +23,13 @@ function Map(props) {
 
     logger.logDebug(`Parameters:${parameters}`);
     return (
-        <div className="col-7">
+        <div className="col-md-7 mt-5 rounded-lg embed-responsive  embed-responsive-4by3">
             <iframe
+                className="embed-responsive-item"
                 title="Map"
                 width="600"
                 height="450"
-                frameBorder="0" style={{ "border": 0 }}
+                style={{ "border": 0 }}
                 src={`https://www.google.com/maps/embed/v1/place?key=${GMAPS_API_KEY}&q=${parameters}`}
                 allowFullScreen>
 

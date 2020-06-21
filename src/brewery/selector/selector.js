@@ -21,7 +21,7 @@ function Selector(props) {
         return <Brewery key={b.id} brewery={b} onListClick={props.onListClick} distance={getDistance(userloc,bCoord)}/>;
     });
     return (
-        <div className="col-5 b-danger">
+        <div className="col-md-5 b-danger">
             <ul className="brewery-list list-group list-group-flush">
                 <Search onChange={props.onFilterChange} value={props.filterValue}/>
                 {breweries}
