@@ -4,8 +4,7 @@ import Breweries from './brewery/breweries';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from "react-router-dom";
 import Header from './header/header';
 import Footer from './footer/footer';

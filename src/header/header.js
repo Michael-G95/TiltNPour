@@ -24,7 +24,7 @@ const Header = ()=>{
                 <span className="navbar-toggler-icon "></span>
             </button>
             <NavLink id="navbar-brand" className="mx-auto" to="/">
-                <img src="./res/titleimg.png" className="rounded-circle"/>
+                <img src="./res/titleimg.png" className="rounded-circle" alt=""/>
             </NavLink>
         </div>
 
@@ -38,9 +38,9 @@ const Header = ()=>{
                 </li>
                 <li className="nav-item">
                     <div className="nav-link">
-                        <a href='#'>FB&nbsp;&nbsp;&nbsp;</a>
-                        <a href='#'>IG&nbsp;&nbsp;&nbsp;</a>
-                        <a href='#'>TW</a>
+                        <NavLink to='#'>FB&nbsp;&nbsp;&nbsp;</NavLink>
+                        <NavLink to='#'>IG&nbsp;&nbsp;&nbsp;</NavLink>
+                        <NavLink to='#'>TW</NavLink>
                     </div>
 
                 </li>

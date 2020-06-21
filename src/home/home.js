@@ -4,7 +4,7 @@ const Home = ()=>{
     return (
         <main className="container-fluid mt-3">
         <figure className="container-fluid row flex-wrap mx-0">
-            <img id="landing" className="col-12" src="./res/beertapoff.svg" height="620px" />
+            <img id="landing" className="col-12" src="./res/beertapoff.svg" height="620px" alt=""/>
             <figcaption className="mx-auto my-3">NI Beer</figcaption>
         </figure>
 

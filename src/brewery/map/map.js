@@ -25,6 +25,7 @@ function Map(props) {
     return (
         <div className="col-7">
             <iframe
+                title="Map"
                 width="600"
                 height="450"
                 frameBorder="0" style={{ "border": 0 }}

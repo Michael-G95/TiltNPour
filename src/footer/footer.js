@@ -1,59 +1,60 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer class="container-fluid">
-            <div class="container-fluid row footer-content mx-auto">
-                <div class="container-fluid col-xs-12 col-md-6 col-lg-4 mx-auto footer-img">
+        <footer className="container-fluid">
+            <div className="container-fluid row footer-content mx-auto">
+                <div className="container-fluid col-xs-12 col-md-6 col-lg-4 mx-auto footer-img">
                 </div>
-                <div class="col-md-6 col-lg-8 row mx-auto footer-links" id="footer-links">
-                    <div class="col-lg-6 mx-auto footer-col">
-                        <div class="container-fluid">
-                            <a href='#'>
+                <div className="col-md-6 col-lg-8 row mx-auto footer-links" id="footer-links">
+                    <div className="col-lg-6 mx-auto footer-col">
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 About Us
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Blog
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Breweries
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Events
-                        </a>
+                        </NavLink>
                         </div>
                     </div>
-                    <div class="col-lg-6 mx-auto footer-col">
-                        <div class="container-fluid">
-                            <a href='#'>
+                    <div className="col-lg-6 mx-auto footer-col">
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Facebook
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Twitter
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Instagram
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Privacy Policy
-                        </a>
+                        </NavLink>
                         </div>
-                        <div class="container-fluid">
-                            <a href='#'>
+                        <div className="container-fluid">
+                            <NavLink to='#'>
                                 Terms
-                        </a>
+                        </NavLink>
                         </div>
                     </div>
                 </div>

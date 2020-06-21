@@ -35,14 +35,14 @@ function Breweries() {
     return <ErrorPanel />
   }
 
-  if (breweryData.length == 0) {
+  if (breweryData.length === 0) {
     return <></>
   }
   const getSelectedBrewery = (id) => {
-    if (id == undefined || id == null)
-      return breweryData.find((b => b.id == selectedBreweryId));
+    if (id === undefined || id === null)
+      return breweryData.find((b => b.id === selectedBreweryId));
     else
-      return breweryData.find(b => b.id == id);
+      return breweryData.find(b => b.id === id);
   }
 
   const markBreweryActive = (id) => {
@@ -57,7 +57,7 @@ function Breweries() {
     });
 
     // Mark id as active
-    let index = data.findIndex(b => b.id == id);
+    let index = data.findIndex(b => b.id === id);
     data[index].active = true;
     setBreweryData(data);
   }
@@ -87,11 +87,13 @@ function Breweries() {
 
   // Render
   return (
-    <div className="container-fluid row col-12 col-xl-8 col-lg-10 col-md-12 mx-auto">
-      <Selector breweries={filteredBreweryData} onListClick={onListClick} onFilterChange={(event)=>setFilter(event.target.value)} filterValue={filter}/>
-      <Map brewery={brewery} />
-      <Distributors distributors={brewery.distributors} />
-    </div>
+    <main className="container-fluid mt-3">
+      <div className="container-fluid row col-12 col-xl-8 col-lg-10 col-md-12 mx-auto">
+        <Selector breweries={filteredBreweryData} onListClick={onListClick} onFilterChange={(event)=>setFilter(event.target.value)} filterValue={filter}/>
+        <Map brewery={brewery} />
+        <Distributors distributors={brewery.distributors} />
+      </div>
+    </main>
   );
 }
 
