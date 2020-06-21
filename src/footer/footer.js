@@ -1,6 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
 
+import fblogo from './res/facebook.png';
+import inlogo from './res/instagram.png';
+import twlogo from './res/twitter.png'
+
 const Footer = () => {
     return (
         <footer className="container-fluid">
@@ -29,23 +33,6 @@ const Footer = () => {
                                 Events
                         </NavLink>
                         </div>
-                    </div>
-                    <div className="col-lg-6 mx-auto footer-col">
-                        <div className="container-fluid">
-                            <NavLink to='#'>
-                                Facebook
-                        </NavLink>
-                        </div>
-                        <div className="container-fluid">
-                            <NavLink to='#'>
-                                Twitter
-                        </NavLink>
-                        </div>
-                        <div className="container-fluid">
-                            <NavLink to='#'>
-                                Instagram
-                        </NavLink>
-                        </div>
                         <div className="container-fluid">
                             <NavLink to='#'>
                                 Privacy Policy
@@ -55,6 +42,17 @@ const Footer = () => {
                             <NavLink to='#'>
                                 Terms
                         </NavLink>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 mx-auto footer-col">
+                        <div className="container-fluid mb-3">
+                        <a href='https://www.facebook.com'>Follow us on <img src={fblogo} alt="Facebook" width="30" height="30"/>&nbsp;&nbsp;&nbsp;</a>
+                        </div>
+                        <div className="container-fluid mb-3">
+                        <a href='https://www.instagram.com'>Follow us on <img src={inlogo} alt="Instagram" width="30" height="30"/>&nbsp;&nbsp;&nbsp;</a>
+                        </div>
+                        <div className="container-fluid mb-3">
+                        <a href='https://www.twitter.com'>Follow us on <img src={twlogo} alt="Twitter" width="30" height="30"/>&nbsp;&nbsp;&nbsp;</a>
                         </div>
                     </div>
                 </div>
