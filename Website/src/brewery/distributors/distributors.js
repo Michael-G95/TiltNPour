@@ -37,9 +37,10 @@ function Distributors(props) {
         <div className="container-fluid">
             <h4 className="text-center section-title mx-auto pt-5">
                 Distributors
-        </h4>
-            <ul className="list-group list-group-flush">
-                {distributors}
+            </h4>
+            <ul className="list-group list-group-flush text-center">
+                {/*distributors*/""}
+                <span className="text-muted mx-0">We're working on this!</span>
             </ul>
         </div>
 

@@ -6,25 +6,29 @@ import Selector from './selector/selector';
 import logger from '../dal/logger';
 import ErrorPanel from '../errorPanel';
 import Distributors from './distributors/distributors';
+import BreweryInfo from './breweryInfo/breweryInfo';
 
 
 function Breweries() {
 
   let [breweryData, setBreweryData] = useState([]);
   let [error, setError] = useState(false);
-  let [selectedBreweryId, setselectedBreweryId] = useState(0);
+  let [selectedBreweryId, setselectedBreweryId] = useState("");
   let [filter,setFilter]=useState("");
 
   useEffect(() => {
     // Load the brewery data
     dataService.getBreweryData()
-      .then((data) => {
+      .then((response) => {
+        console.log(response.data);
+        const data = response.data;
         logger.logDebug(`Breweries loaded: ${data.length}`)
         // Set first brewery to be active
         if(data.length > 0){
           data[0].active = true;
         }
         setBreweryData(data);
+        setselectedBreweryId(data[0].id);
       })
       .catch((err) => {
         setError(true);
@@ -35,10 +39,11 @@ function Breweries() {
     return <ErrorPanel />
   }
 
-  if (breweryData.length === 0) {
+  if (breweryData.length === 0 || selectedBreweryId.length ===0) {
     return <></>
   }
   const getSelectedBrewery = (id) => {
+    console.log("LEN: "+selectedBreweryId.length);
     if (id === undefined || id === null)
       return breweryData.find((b => b.id === selectedBreweryId));
     else
@@ -74,11 +79,12 @@ function Breweries() {
   // Apply filter
 
   let filteredBreweryData = breweryData;
-  if(filter.length > 0){
+  if(filter.length > 0){ 
     // Filter has been entered
     filteredBreweryData = breweryData.filter(b=>{
+      console.log(b);
       return b.name.toUpperCase().includes(filter.toUpperCase())
-            || b.address.toUpperCase().includes(filter.toUpperCase());
+            || b.street_address.toUpperCase().includes(filter.toUpperCase());
     });
   }; 
 
@@ -88,10 +94,12 @@ function Breweries() {
   // Render
   return (
     <main className="container-fluid mt-3">
-      <div className="container-fluid row col-12 col-xl-8 col-lg-10 col-md-12 mx-auto">
+      <div className="container-fluid row col-12 col-xl-10  col-md-12 mx-auto">
         <Selector breweries={filteredBreweryData} onListClick={onListClick} onFilterChange={(event)=>setFilter(event.target.value)} filterValue={filter}/>
         <Map brewery={brewery} />
+        <BreweryInfo brewery={brewery} />
         <Distributors distributors={brewery.distributors} />
+        
       </div>
     </main>
   );

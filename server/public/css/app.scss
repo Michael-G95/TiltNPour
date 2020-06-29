@@ -1,0 +1,10 @@
+@import 'constants';
+
+.brewery-list-item :hover{
+    background-color: lightgray !important;
+    border-radius: 5px;
+}
+
+.brewery-list-item {
+    border-radius: 5px;
+}

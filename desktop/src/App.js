@@ -1,24 +1,43 @@
 import React from 'react';
 import './App.css';
+import Menu from './menu/menu';
+import Main from './root/main'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import AddBrewery from './breweries/AddBrewery';
+import EditBrewery from './breweries/EditBrewery';
+import FindEditDeleteBrewery from './breweries/FindEditDeleteBrewery';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={""} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Menu />
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/addbrewery" exact>
+            <AddBrewery />
+          </Route>
+          <Route path="/editbrewery/:id" exact>
+            <EditBrewery />
+          </Route>
+          <Route path="/editbrewery" exact>
+            <FindEditDeleteBrewery />
+          </Route>
+
+
+
+          <Route path="/">
+            <Main />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

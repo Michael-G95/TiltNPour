@@ -1,5 +1,4 @@
 function getDistance(coords1, coords2) {
-
     if(coords1.lon === 0 || coords1.lat === 0){
         // User location didnt load
         //TODO: improve this?

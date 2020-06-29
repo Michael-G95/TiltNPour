@@ -11,6 +11,9 @@ function Selector(props) {
                 lat:p.coords.latitude,
                 lon:p.coords.longitude
             });
+        },
+        (error)=>{
+            console.log("ERROR accessing geolocation: "+error.message);
         })
     }
     const breweries = props.breweries.map(b=>{
@@ -22,12 +25,12 @@ function Selector(props) {
     });
     return (
         <div className="col-md-5 b-danger">
-            <ul className="brewery-list list-group list-group-flush">
+            <div className="brewery-list list-group list-group-flush  brewery-selector">
                 <Search onChange={props.onFilterChange} value={props.filterValue}/>
                 {breweries}
-            </ul>
+            </div>
         </div>
-    );
+    ); 
 }
 
 export default Selector;

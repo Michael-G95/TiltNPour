@@ -1,0 +1,36 @@
+.brewery-list-item :hover {
+  background-color: lightgray !important;
+  border-radius: 5px;
+}
+
+.brewery-list-item {
+  /*mobile requires the padding for some reason to display at all*/
+  border-radius: 5px;
+  padding:3em;
+}
+
+.brewery-selector{
+  max-height: 400px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling: touch; 
+}
+
+@media only screen and (min-width: 578px){
+  .brewery-list-item{
+    padding:1em;
+  }
+
+  .brewery-selector{
+    max-height: 600px;
+  }
+}
+
+.brewery-pill-badge{
+  justify-self: flex-end !important;
+}
+
+.brewery-list-item-parent{
+  border-radius:5px;
+}
+
+/*# sourceMappingURL=app.css.map */
