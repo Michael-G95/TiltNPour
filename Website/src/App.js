@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './home/home'
-import Breweries from './brewery2/breweries';
+import Breweries from './brewery/breweries';
 import {
     BrowserRouter as Router,
     Switch,
