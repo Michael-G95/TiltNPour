@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const host_url = "http://192.168.0.243:3000"//"http://localhost:3000";
+const host_url = "https://tiltnpour.herokuapp.com"
 
 export function getBreweryData() {
     return axios.get(host_url+'/api/breweries');
