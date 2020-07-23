@@ -1,4 +1,4 @@
-const Message = require('./Message');
+const Message = require('./message');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const db = require("./database");

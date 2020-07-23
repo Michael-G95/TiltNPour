@@ -1,4 +1,4 @@
-const Event = require('./Event');
+const Event = require('./event');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const db = require("./database");

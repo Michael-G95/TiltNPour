@@ -5,7 +5,6 @@ const app = require('../app');
 
 /* GET all Events. */
 router.get('/', function(req, res, next) {
-    console.log("xxxxx");
     Event.getAllEvents()
     .then((events)=>{
       res.json(events);
