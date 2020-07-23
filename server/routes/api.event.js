@@ -1,19 +1,14 @@
 var express = require('express');
 var router = express.Router();
-var Brewery = require('../dal/database.brewery');
+var Event = require('../dal/database.event');
 const app = require('../app');
 
-
-/* GET all breweries. */
+/* GET all Events. */
 router.get('/', function(req, res, next) {
-  
-  Brewery.getAllBreweries()
-    .then((breweries)=>{
-      res.json(breweries);
-
-      breweries.forEach(element => {
-        Brewery.updateBrewery(element);
-      });
+    console.log("xxxxx");
+    Event.getAllEvents()
+    .then((events)=>{
+      res.json(events);
     })
     .catch((error)=>{
       res.json(error);
@@ -21,16 +16,16 @@ router.get('/', function(req, res, next) {
 
 });
 
-/* GET one brewery. */
-router.get('/:id', function(req, res, next) {
+/* GET one event. */
+router.get('/get/:id', function(req, res, next) {
     const id = req.params.id;
     if(id===undefined || id == null ){
         res.sendStatus(400); // Unprocessable entity
         return;
     }
-    Brewery.getBrewery(id)
-      .then((brewery)=>{
-        res.json(brewery);
+    Event.getEvent(id)
+      .then((event)=>{
+        res.json(event);
       })
       .catch((error)=>{
           // Assume not found

@@ -10,7 +10,7 @@ const Header = ()=>{
         <div className="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
             <ul className="navbar-nav ml-auto text-center ">
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink exact className="nav-link" to="#">About Us</NavLink>
+                    <NavLink exact className="nav-link" to="/aboutus">About Us</NavLink>
                 </li>
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                     <NavLink exact className="nav-link" to="#">Blog</NavLink>
@@ -26,17 +26,17 @@ const Header = ()=>{
                 <span className="navbar-toggler-icon "></span>
             </button>
             <NavLink id="navbar-brand" className="mx-auto" to="/">
-                <img src="./res/titleimg.png" className="rounded-circle" alt=""/>
+                <img src="/res/titleimg.png" className="rounded-circle" alt=""/>
             </NavLink>
         </div>
 
         <div className="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2">
             <ul className="navbar-nav mr-auto text-center">
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink exact className="nav-link" to="#" >Events</NavLink>
+                    <NavLink exact className="nav-link" to="/events" >Events</NavLink>
                 </li>
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink exact className="nav-link" to="#">Contact</NavLink>
+                    <NavLink exact className="nav-link" to="/contactus">Contact</NavLink>
                 </li>
                 <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                     <div className="nav-link">

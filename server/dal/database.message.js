@@ -1,7 +1,7 @@
-const Brewery = require('./brewery');
+const Message = require('./Message');
 const mongoose = require('mongoose');
-const db = require('./database');
 const ObjectId = mongoose.Types.ObjectId;
+const db = require("./database");
 
 const mapIdToObjectIdForUpdateOrDelete = (item) => {
     let tmp = { ...item, _id: item.id };
@@ -21,21 +21,50 @@ const insertItem = (item, createItem) => {
     });
 }
 
+const validateMessage= (msg) => {
+    let valid = true;
 
-const insertBrewery = (item) => {
-    // Try to save the object. 
-    // returns the promise
-    return insertItem(item, (x) => new Brewery.Model(Brewery.standardiseBreweryFields(x)));
+    // Validate for no null/undefs
+    for (const property in msg) {
+        if (msg[property] === null || msg[property] === undefined)
+            valid = false;
+    }
+
+    if (!valid)
+        return false;
+
+    // Object specific validation
+
+    // Used to validate the sending time. 25h leeway so never an issue with timezones or someones time a bit off.
+    // TODO add rejection reason from server
+    const in25Hours = new Date();
+    in25Hours.setTime(in25Hours.getTime() + (25*60*60*1000)); 
+
+    return (
+        typeof msg.name === 'string' && msg.name.length > 0 &&
+        typeof msg.emailcontact === 'string' && msg.emailcontact.length > 0 &&
+        typeof msg.message === 'string' && msg.message.length > 0 &&
+        typeof msg.confirmed === 'boolean' &&
+        typeof msg.timestamp === 'object' && msg.timestamp <= in25Hours
+    );
 }
 
-const updateBrewery = (item) => {
+
+
+const insertMessage = (item) => {
     // Try to save the object. 
     // returns the promise
-    
-    var brewery = mapIdToObjectIdForUpdateOrDelete(Brewery.standardiseBreweryFields(item));
+    return insertItem(item, (x) => new Message.Model(Message.standardiseMessageFields(x)));
+}
+
+const updateMessage = (item) => {
+    // Try to save the object. 
+    // returns the promise
+
+    var Message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
 
     return new Promise((resolve, reject) => {
-        Brewery.Model.findOneAndUpdate({ _id: brewery._id }, brewery,
+        Message.Model.findOneAndUpdate({ _id: Message._id }, Message,
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -44,17 +73,17 @@ const updateBrewery = (item) => {
 
 }
 
-const deleteBrewery = (item)=>{
+const deleteMessage = (item) => {
     // Try to delete the object.
     // returns the promise
 
-    var brewery = mapIdToObjectIdForUpdateOrDelete(Brewery.standardiseBreweryFields(item));
+    var Message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
     return new Promise((resolve, reject) => {
-    Brewery.Model.findOneAndDelete({_id:brewery._id},
-        (err, obj) => {
-            if (err) reject(err);
-            else resolve(obj);
-        });
+        Message.Model.findOneAndDelete({ _id: Message._id },
+            (err, obj) => {
+                if (err) reject(err);
+                else resolve(obj);
+            });
     });
 }
 
@@ -77,34 +106,34 @@ const mapObjectIdToId = (args) => {
     }
 }
 
-const getAllBreweries = () => {
+const getAllMessages = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find().lean().exec((err, results) => {
+        Message.Model.find().lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Brewery.standardiseBreweryFields(b))
+                        .map(b => Message.standardiseMessageFields(b))
                 );
 
         })
     });
 }
 
-const getBrewery = (id) => {
+const getMessage = (id) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
+        Message.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Brewery.standardiseBreweryFields(b))
+                        .map(b => Message.standardiseMessageFields(b))
                 );
         })
     });
@@ -113,9 +142,10 @@ const getBrewery = (id) => {
 
 
 module.exports = {
-    insertBrewery,
-    getAllBreweries,
-    getBrewery,
-    updateBrewery,
-    deleteBrewery
+    insertMessage,
+    getAllMessages,
+    getMessage,
+    updateMessage,
+    deleteMessage,
+    validateMessage
 };

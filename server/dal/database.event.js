@@ -1,7 +1,7 @@
-const Brewery = require('./brewery');
+const Event = require('./Event');
 const mongoose = require('mongoose');
-const db = require('./database');
 const ObjectId = mongoose.Types.ObjectId;
+const db = require("./database");
 
 const mapIdToObjectIdForUpdateOrDelete = (item) => {
     let tmp = { ...item, _id: item.id };
@@ -22,20 +22,20 @@ const insertItem = (item, createItem) => {
 }
 
 
-const insertBrewery = (item) => {
+const insertEvent = (item) => {
     // Try to save the object. 
     // returns the promise
-    return insertItem(item, (x) => new Brewery.Model(Brewery.standardiseBreweryFields(x)));
+    return insertItem(item, (x) => new Event.Model(Event.standardiseEventFields(x)));
 }
 
-const updateBrewery = (item) => {
+const updateEvent = (item) => {
     // Try to save the object. 
     // returns the promise
     
-    var brewery = mapIdToObjectIdForUpdateOrDelete(Brewery.standardiseBreweryFields(item));
+    var Event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
 
     return new Promise((resolve, reject) => {
-        Brewery.Model.findOneAndUpdate({ _id: brewery._id }, brewery,
+        Event.Model.findOneAndUpdate({ _id: Event._id }, Event,
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -44,13 +44,13 @@ const updateBrewery = (item) => {
 
 }
 
-const deleteBrewery = (item)=>{
+const deleteEvent = (item)=>{
     // Try to delete the object.
     // returns the promise
 
-    var brewery = mapIdToObjectIdForUpdateOrDelete(Brewery.standardiseBreweryFields(item));
+    var Event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
     return new Promise((resolve, reject) => {
-    Brewery.Model.findOneAndDelete({_id:brewery._id},
+    Event.Model.findOneAndDelete({_id:Event._id},
         (err, obj) => {
             if (err) reject(err);
             else resolve(obj);
@@ -77,34 +77,34 @@ const mapObjectIdToId = (args) => {
     }
 }
 
-const getAllBreweries = () => {
+const getAllEvents = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find().lean().exec((err, results) => {
+        Event.Model.find().lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Brewery.standardiseBreweryFields(b))
+                        .map(b => Event.standardiseEventFields(b))
                 );
 
         })
     });
 }
 
-const getBrewery = (id) => {
+const getEvent = (id) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Brewery.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
+        Event.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Brewery.standardiseBreweryFields(b))
+                        .map(b => Event.standardiseEventFields(b))
                 );
         })
     });
@@ -113,9 +113,9 @@ const getBrewery = (id) => {
 
 
 module.exports = {
-    insertBrewery,
-    getAllBreweries,
-    getBrewery,
-    updateBrewery,
-    deleteBrewery
+    insertEvent,
+    getAllEvents,
+    getEvent,
+    updateEvent,
+    deleteEvent
 };

@@ -33,4 +33,25 @@
   border-radius:5px;
 }
 
+.events-header{
+  background-color: lightslategrey;
+}
+
+@media (max-width: 500px) {
+  .dropdown-menu{
+        height:200px;
+        overflow-y:auto;
+     }
+  }
+  
+
+  .link-unstyled, .link-unstyled:link {
+    color: inherit;
+    text-decoration: inherit;
+  }
+
+  .link-unstyled-hover:hover{
+    color: inherit;
+    text-decoration: inherit;
+  } 
 /*# sourceMappingURL=app.css.map */

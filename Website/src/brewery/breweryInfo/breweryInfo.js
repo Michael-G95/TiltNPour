@@ -1,7 +1,5 @@
 import React from 'react'
 import Links from './links'
-import logger from '../../dal/logger';
-
 
 export default ({ brewery }) => {
 
@@ -42,7 +40,6 @@ export default ({ brewery }) => {
     // Contact
     let emailInfo = generateInfoLine("Email", brewery.email)
     let telephoneInfo = generateInfoLine("Telephone", brewery.telephone)
-    const noContactInfo = emailInfo===null && telephoneInfo===null;
 
 
     return (

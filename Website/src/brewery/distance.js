@@ -1,13 +1,17 @@
-function getDistance(coords1, coords2) {
+function getDistance(coords1, coords2,printDebugs=false) {
     if(coords1.lon === 0 || coords1.lat === 0){
         // User location didnt load
-        //TODO: improve this?
+        //TODO: improve this?d
         return 0;
     }
     const lat1 = coords1.lat;
-    const lat2 = coords2.lat;
+    const lat2 = coords2.lat; 
     const lon1 = coords1.lon;
     const lon2 = coords2.lon;
+
+    if(printDebugs)
+        console.log(lat1,lon1,lat2,lon2);
+        
     const R = 6371e3; // metres
     const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
     const φ2 = lat2 * Math.PI / 180;

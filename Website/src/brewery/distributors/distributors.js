@@ -1,6 +1,7 @@
 import React,{useState} from 'react';
 import getDistance from '../distance';
 import logger from '../../dal/logger';
+import wwwlogo from '../breweryInfo/res/link.svg';
 
 function Distributors(props) {
     let [userloc,setUserLoc]=useState({lat:0,lon:0});
@@ -22,14 +23,25 @@ function Distributors(props) {
         }
     })
     const orderedDistributors = distributorsWithDistance.sort((a, b) => (a.distance > b.distance) ? 1 : -1)
-    const distributors = orderedDistributors.map(d => {
+    const distributors = orderedDistributors.map((d,index) => {
         return (
-            <li key={d.id} className="list-group-item text-center col-md-6 mx-auto">
-                {d.name ? <>{d.name}<br /></> : ""}
-                {d.address ? <>{d.address}<br /></> : ""}
-                {d.contact1 ? <>{d.contact1}<br /></> : ""}
-                {d.contact2 ? <>{d.contact2}<br /></> : ""}
-                <span className="badge badge-primary badge-pill">{`${d.distance} mi`}</span>
+            <li key={index} className="container-fluid row list-group-item text-center col-md-6 mx-auto">
+                <div className="container-fluid row">
+                <div className="col-md-9 mx-auto">
+                    {d.name ? <>{d.name}<br /></> : ""}
+                    {d.address ? <>{d.address}<br /></> : ""}
+                    {d.contact1 ? <>{d.contact1}<br /></> : ""}
+                    {d.contact2 ? <>{d.contact2}<br /></> : ""}
+                    {d.website ? <>
+                        <div className={`mx-auto text-center`}>
+                            <a href={d.website}><img className="mx-auto" src={wwwlogo} alt="Website" width="30" height="30" />&nbsp;&nbsp;&nbsp;</a>
+                        </div>
+                        <br /></> : ""}
+                </div>
+                <div className="col-md-3">
+                    <span className="badge badge-primary badge-pill">{`${d.distance} mi`}</span>
+                </div>
+                </div>
             </li>
         )
     })
@@ -39,8 +51,10 @@ function Distributors(props) {
                 Distributors
             </h4>
             <ul className="list-group list-group-flush text-center">
-                {/*distributors*/""}
-                <span className="text-muted mx-0">We're working on this!</span>
+                {distributors.length === 0 ? 
+                    <span className="text-muted mx-0">No distributors. If this is wrong, please contact us!</span>:
+                    distributors
+                }
             </ul>
         </div>
 

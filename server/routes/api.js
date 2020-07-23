@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var breweryApi = require('./api.brewery');
+var eventApi = require('./api.event');
+var messageApi = require('./api.message');
 const app = require('../app');
 
 
@@ -17,5 +19,10 @@ router.get("/gmapsapikey",(req,res)=>{
 })
 
 router.use('/breweries', breweryApi);
+
+router.use('/events', eventApi);
+
+router.use('/message', messageApi);
+
 
 module.exports = router;
