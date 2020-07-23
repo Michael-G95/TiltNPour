@@ -31,15 +31,17 @@ const MonthEvents = (props)=>{
 
     // Have the events data
 
-    const eventsForThisMonth = events.filter(e=>e.month === month && e.date > new Date() );
-
+    const eventsForThisMonth = events.filter(e=>{
+        return e.month === month && new Date(e.date) > new Date() 
+    });
+    console.log(eventsForThisMonth.length);
     console.log(eventsForThisMonth);
 
 
     const eventsDisplay = eventsForThisMonth.map(e=> <EventsDisplay event={e} key={e.id}/>)
     return (
         <main className="container-fluid mt-3">
-        <Jumbotron title="Events" text={<>We've put together some upcoming events you might be interested in.<br />Something we missed? Let us know and we'll add it right here.</>}/>
+        <Jumbotron title={"Events"} text={<>We've put together some upcoming events you might be interested in.<br />Something we missed? Let us know and we'll add it right here.</>}/>
         <MonthSelector />
         <div className="container-fluid row col-12 col-xl-10 col-md-12 mx-auto mt-4">
             {eventsDisplay}

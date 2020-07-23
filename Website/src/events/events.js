@@ -27,7 +27,7 @@ const Events = () => {
         eventsDisplay = events.map(e=><EventsDisplay event={e} key={e.id}/>)
     return (
         <main className="container-fluid mt-3">
-            <Jumbotron />
+        <Jumbotron title={"Events"} text={<>We've put together some upcoming events you might be interested in.<br />Something we missed? Let us know and we'll add it right here.</>}/>
             <MonthSelector />
             <h4 className="text-center section-title mx-auto mt-4">
                     Upcoming events

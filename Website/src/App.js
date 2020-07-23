@@ -3,7 +3,6 @@ import Home from './home/home'
 import Breweries from './brewery/breweries';
 import {
     BrowserRouter as Router,
-    Switch,
     Route
 } from "react-router-dom";
 import Header from './header/header';

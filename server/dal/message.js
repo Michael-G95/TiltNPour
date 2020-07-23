@@ -5,7 +5,6 @@ const mongoose = require("mongoose");
 // This pattern ensures the Brewery object has the required fields, initialised to "" if not present
 
 const standardiseMessageFields = ({id="",name="",emailcontact="",message="",confirmed="",timestamp=""})=>{
-console.log(name);
     return {
         id,
         name,
