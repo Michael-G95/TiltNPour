@@ -13,7 +13,7 @@ const Header = ()=>{
                     <NavLink exact className="nav-link" to="/aboutus">About Us</NavLink>
                 </li>
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
-                    <NavLink exact className="nav-link" to="#">Blog</NavLink>
+                    <NavLink exact className="nav-link" to="/blog">Blog</NavLink>
                 </li>
                 <li className="nav-item mx-2" data-toggle="collapse" data-target=".navbar-collapse.show">
                     <NavLink exact className="nav-link" to="/breweries">Breweries</NavLink>

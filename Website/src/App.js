@@ -14,6 +14,8 @@ import Events from './events/events';
 import MonthEvents from './monthEvents/monthEvents';
 import AboutUs from './aboutUs/aboutUs';
 import ContactUs from './contactUs/ContactUs';
+import BlogPage from './blog/blogPage';
+import BlogHome from './blog/blogHome';
 dotenv.config();
 
 const App = () => {
@@ -40,6 +42,14 @@ const App = () => {
 
                 <Route path="/contactus" exact>
                     <ContactUs />
+                </Route>
+
+                <Route path="/blog" exact>
+                    <BlogHome />
+                </Route>
+
+                <Route path="/blog/:article" exact>
+                    <BlogPage />
                 </Route>
 
                 <Route path="/" exact>

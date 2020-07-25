@@ -94,7 +94,7 @@ function Breweries() {
   // Render
   return (
     <main className="container-fluid mt-3">
-      <div className="container-fluid row col-12 col-xl-10  col-md-12 mx-auto">
+      <div className="container-fluid row col-12 col-xl-10 col-md-12 mx-auto">
         <Selector breweries={filteredBreweryData} onListClick={onListClick} onFilterChange={(event)=>setFilter(event.target.value)} filterValue={filter}/>
         <Map brewery={brewery} />
         <BreweryInfo brewery={brewery} />

@@ -5,7 +5,7 @@ const ObjectId = mongoose.Types.ObjectId;
 
 const mapIdToObjectIdForUpdateOrDelete = (item) => {
     let tmp = { ...item, _id: item.id };
-    delete item.id;
+    delete tmp.id;
     return tmp;
 }
 

@@ -14,34 +14,34 @@ const Footer = () => {
                 <div className="col-md-6 col-lg-8 row mx-auto footer-links" id="footer-links">
                     <div className="col-lg-6 mx-auto footer-col">
                         <div className="container-fluid">
-                            <NavLink to='#'>
+                            <NavLink to='/aboutus'>
                                 About Us
-                        </NavLink>
+                            </NavLink>
                         </div>
                         <div className="container-fluid">
-                            <NavLink to='#'>
+                            <NavLink to='/blog'>
                                 Blog
-                        </NavLink>
+                            </NavLink>
                         </div>
                         <div className="container-fluid">
-                            <NavLink to='#'>
+                            <NavLink to='/breweries'>
                                 Breweries
-                        </NavLink>
+                            </NavLink>
                         </div>
                         <div className="container-fluid">
-                            <NavLink to='#'>
+                            <NavLink to='/events'>
                                 Events
-                        </NavLink>
+                            </NavLink>
                         </div>
                         <div className="container-fluid">
                             <NavLink to='#'>
                                 Privacy Policy
-                        </NavLink>
+                            </NavLink>
                         </div>
                         <div className="container-fluid">
                             <NavLink to='#'>
                                 Terms
-                        </NavLink>
+                            </NavLink>
                         </div>
                     </div>
                     <div className="col-lg-6 mx-auto footer-col">

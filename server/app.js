@@ -4,11 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-const bodyParser = require('body-parser');
+const methodOverride = require('method-override')
 require('dotenv').config();
 
 var apiRouter = require('./routes/api');
 var appRouter = require('./routes/app');
+var blogRouter = require('./routes/app.blog');
+var adminRouter = require('./routes/app.admin');
 const databaseBrewery = require('./dal/database.brewery');
 
 
@@ -18,7 +20,7 @@ app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -28,7 +30,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 global.__basedir = path.resolve(__dirname);
 
+app.use(methodOverride('_method'));
+
 app.use('/api', apiRouter);
+app.use('/blog',blogRouter);
+app.use('/admin',adminRouter);
 app.use('*', appRouter);
 
 

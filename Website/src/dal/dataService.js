@@ -24,6 +24,15 @@ export function getHostUrl(){
 export function postNewMessage(message){
     return axios.post(host_url+"/api/message/new",message);
 }
+
+export function getArticleSummaries(){
+    return axios.get(host_url+"/blog/get");
+}
+
+export function getArticleHtml(article){
+    return axios.get(host_url+"/blog/get/"+article);
+}
+
 export default {
     getBreweryData
 }

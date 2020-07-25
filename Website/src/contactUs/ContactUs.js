@@ -85,7 +85,8 @@ const ContactUs = () => {
                 <h4 className="text-center section-title mx-auto mb-4">
                     Submit a message
                 </h4>
-                    <form action="javascript:void(0);">
+                
+                    <form action="">
                         <div className="form-group">
                             <label htmlFor="name">Name</label>
                             <input type="text" className="form-control" id="name" placeholder="Enter name" value={nameValue} onChange={(e) => handleOnChangeEvent(e, setNameValue)} />

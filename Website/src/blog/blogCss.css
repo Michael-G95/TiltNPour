@@ -1,0 +1,13 @@
+.blog-header{
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 2px;
+  padding: 30px 100px 20px 100px;
+  border-bottom: 1px solid #dedede;
+  margin-bottom: 30px;
+}
+
+.blog-date{
+    text-align: center;
+    font-weight: 600;
+}

@@ -1,4 +1,4 @@
-const Message = require('./message');
+const Article = require('./Article');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const db = require("./database");
@@ -21,12 +21,12 @@ const insertItem = (item, createItem) => {
     });
 }
 
-const validateMessage= (msg) => {
+const validateArticle = (article) => {
     let valid = true;
 
     // General validate for no null/undefs
-    for (const property in msg) {
-        if (msg[property] === null || msg[property] === undefined)
+    for (const property in article) {
+        if (article[property] === null || article[property] === undefined)
             valid = false;
     }
 
@@ -35,51 +35,46 @@ const validateMessage= (msg) => {
 
     // Object specific validation
 
-    // Used to validate the sending time. 25h leeway to avoid any timezone issues between client and server, and browser time inaccuracies.
-    // This is to block requests where the timestamp is way off, an idea of
-    const in25Hours = new Date();
-    in25Hours.setTime(in25Hours.getTime() + (25*60*60*1000)); 
-
     return (
-        typeof msg.name === 'string' && msg.name.length > 0 &&
-        typeof msg.emailcontact === 'string' && msg.emailcontact.length > 0 &&
-        typeof msg.message === 'string' && msg.message.length > 0 &&
-        typeof msg.confirmed === 'boolean' &&
-        typeof msg.timestamp === 'object' && msg.timestamp <= in25Hours
+        typeof article.title === 'string' && article.title.length > 0 &&
+        typeof article.description === 'string' && article.description.length > 0 &&
+        typeof article.markdown === 'string' && article.markdown.length > 0 ,
+        typeof article.author === 'string' && article.author.length > 0 
     );
 }
 
 
 
-const insertMessage = (item) => {
+const insertArticle = (item) => {
     // Try to save the object. 
     // returns the promise
-    return insertItem(item, (x) => new Message.Model(Message.standardiseMessageFields(x)));
+    return insertItem(item, (x) => new Article.Model(Article.standardiseArticleFields(x)));
 }
 
-const updateMessage = (item) => {
+const updateArticle = (item) => {
     // Try to save the object. 
     // returns the promise
-
-    var Message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
-
+    console.log(item);
+    var article = mapIdToObjectIdForUpdateOrDelete(Article.standardiseArticleFields(item));
+    console.log(article);
     return new Promise((resolve, reject) => {
-        Message.Model.findOneAndUpdate({ _id: Message._id }, Message,
+        Article.Model.findOneAndUpdate({ _id: article._id }, article, {new:true},
             (err, obj) => {
                 if (err) reject(err);
-                else resolve(obj);
+                else resolve(mapObjectIdToId(obj));
             });
     });
 
 }
 
-const deleteMessage = (item) => {
+const deleteArticle = (item) => {
     // Try to delete the object.
     // returns the promise
-
-    var Message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
+    console.log(article);
+    var article = mapIdToObjectIdForUpdateOrDelete(item);
+    console.log(article);
     return new Promise((resolve, reject) => {
-        Message.Model.findOneAndDelete({ _id: Message._id },
+        Article.Model.findOneAndDelete({ _id: article._id },
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -106,46 +101,65 @@ const mapObjectIdToId = (args) => {
     }
 }
 
-const getAllMessages = () => {
+const getAllArticles = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Message.Model.find().lean().exec((err, results) => {
+        Article.Model.find().lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Message.standardiseMessageFields(b))
+                        .map(b => Article.standardiseArticleFields(b))
                 );
 
         })
     });
 }
 
-const getMessage = (id) => {
+const getArticle = (id) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Message.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
+        Article.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
+            console.log("RESULTS:",results);
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Message.standardiseMessageFields(b))
+                        .map(b => Article.standardiseArticleFields(b))
                 );
         })
     });
 }
 
+const getArticleSummaries = () => {
+    return new Promise((resolve, reject) => {
+        // eslint-disable-next-line array-callback-return
+        Article.Model.find().lean().exec((err, results) => {
+            if (err)
+                reject(err);
+            else
+                // using the populate here to ensure same order each time
+                // Also summarising here to remove markdown as don't want to send this with summary
+                resolve(
+                    Article.getSummaryForArticle(
+                        mapObjectIdToId(results)
+                            .map(b => Article.standardiseArticleFields(b))
+                    )
+                );
 
+        })
+    });
+}
 
 module.exports = {
-    insertMessage,
-    getAllMessages,
-    getMessage,
-    updateMessage,
-    deleteMessage,
-    validateMessage
+    insertArticle,
+    getAllArticles,
+    getArticle,
+    updateArticle,
+    deleteArticle,
+    validateArticle
 };
