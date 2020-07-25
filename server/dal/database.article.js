@@ -1,4 +1,4 @@
-const Article = require('./Article');
+const Article = require('./article');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const db = require("./database");
