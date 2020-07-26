@@ -31,7 +31,7 @@ router.post('/get/preview', checkAuthenticated , async (req,res,next)=>{
     data.dateString = new Date().toLocaleDateString();
     data.html = marked(data.markdown);
     console.log("GET PREVIEW: data",data);
-    const html = await renderFileSafely('user/_article', {article:data});
+    const html = await renderFileSafely(path.join('user','_article'), {article:data});
     console.log("GET PREVIEW: got hml",data);
     htmlPreview = DOMPurify.sanitize(html);
     console.log("GET PREVIEW: sanitized",data);
