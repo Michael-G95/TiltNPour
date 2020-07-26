@@ -16,8 +16,8 @@ const checkAuthenticated = require('./checkAuthenticated');
 
 // Helper methods
 var _viewsDir = path.join(__dirname, "..", "views");
-const getView = function (path) {
-    return _viewsDir + "\\" + path + ".ejs";
+const getView = function (dir) {
+    return path.join(_viewsDir, dir + ".ejs");
 }
 const renderFileSafely = async function (file, arg1) {
     const html = (await ejs.renderFile(getView(file), arg1));
@@ -32,7 +32,7 @@ router.post('/get/preview', checkAuthenticated , async (req,res,next)=>{
     data.html = marked(data.markdown);
     console.log("GET PREVIEW: data",data);
     const html = await renderFileSafely(path.join('user','_article'), {article:data});
-    console.log("GET PREVIEW: got hml",data);
+    console.log("GET PREVIEW: got html",data);
     htmlPreview = DOMPurify.sanitize(html);
     console.log("GET PREVIEW: sanitized",data);
     return res.json({htmlPreview});

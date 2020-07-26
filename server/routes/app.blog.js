@@ -13,11 +13,9 @@ var ejs = require('ejs')
 
 // Helper methods
 var _viewsDir = path.join(__dirname, "..", "views/");
-console.log("VIEWSDIR",_viewsDir,"\n",path.normalize(_viewsDir));
+console.log("VIEWSDIR",_viewsDir);
 const getView = function (dir) {
-    var p2 = path.join(_viewsDir, dir,".ejs");
-    console.log("P2_D", p2);
-    console.log("P2_N", path.normalize(p2));
+    return path.join(_viewsDir, dir+".ejs");
 }
 const renderFileSafely = async function (file, arg1) {
     const html = (await ejs.renderFile(getView(file), arg1));
