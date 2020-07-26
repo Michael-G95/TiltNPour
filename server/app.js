@@ -5,13 +5,24 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 const methodOverride = require('method-override')
-require('dotenv').config();
+if(process.env.NODE_ENV !== 'production'){
+  console.log("Loading .env")
+  require('dotenv').config();
+}
 
+// Authentication
+const flash = require('express-flash')
+const session = require('express-session')
+const passport = require('passport');
+
+// Routes
 var apiRouter = require('./routes/api');
 var appRouter = require('./routes/app');
 var blogRouter = require('./routes/app.blog');
-var adminRouter = require('./routes/app.admin');
-const databaseBrewery = require('./dal/database.brewery');
+var adminRouter = require('./routes/admin/app.admin');
+var authenticationRouter = require('./routes/app.authenticate');
+
+
 
 
 var app = express();
@@ -32,9 +43,21 @@ global.__basedir = path.resolve(__dirname);
 
 app.use(methodOverride('_method'));
 
+app.use(flash())
+app.use(session({
+  secret:process.env.SESSION_SECRET,
+  resave:false,
+  saveUninitialized:false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
+
+// Routes
 app.use('/api', apiRouter);
 app.use('/blog',blogRouter);
 app.use('/admin',adminRouter);
+app.use('/authenticate',authenticationRouter);
 app.use('*', appRouter);
 
 
@@ -48,10 +71,11 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+  console.log("ERROR!",err);
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.json(err);
+  //res.render('error'); (not implemented)
 });
 
 

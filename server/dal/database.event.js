@@ -32,10 +32,10 @@ const updateEvent = (item) => {
     // Try to save the object. 
     // returns the promise
     
-    var Event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
+    var event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
 
     return new Promise((resolve, reject) => {
-        Event.Model.findOneAndUpdate({ _id: Event._id }, Event,
+        Event.Model.findOneAndUpdate({ _id: event._id }, event,
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -50,7 +50,7 @@ const deleteEvent = (item)=>{
 
     var Event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
     return new Promise((resolve, reject) => {
-    Event.Model.findOneAndDelete({_id:Event._id},
+        event.Model.findOneAndDelete({_id:event._id},
         (err, obj) => {
             if (err) reject(err);
             else resolve(obj);

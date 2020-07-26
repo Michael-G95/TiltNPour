@@ -1,7 +1,8 @@
-const Message = require('./message');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const db = require("./database");
+const User = require('./user');
+const { reset } = require('nodemon');
 
 const mapIdToObjectIdForUpdateOrDelete = (item) => {
     let tmp = { ...item, _id: item.id };
@@ -21,12 +22,12 @@ const insertItem = (item, createItem) => {
     });
 }
 
-const validateMessage= (msg) => {
+const validateUser= (usr) => {
     let valid = true;
 
     // General validate for no null/undefs
-    for (const property in msg) {
-        if (msg[property] === null || msg[property] === undefined)
+    for (const property in usr) {
+        if (usr[property] === null || usr[property] === undefined)
             valid = false;
     }
 
@@ -35,36 +36,31 @@ const validateMessage= (msg) => {
 
     // Object specific validation
 
-    // Used to validate the sending time. 25h leeway to avoid any timezone issues between client and server, and browser time inaccuracies.
-    // This is to block requests where the timestamp is way off, an idea of
-    const in25Hours = new Date();
-    in25Hours.setTime(in25Hours.getTime() + (25*60*60*1000)); 
+    console.log( typeof usr.permissions === 'array', "*** PERMISSIONS IS ARRAY? ***");
 
     return (
-        typeof msg.name === 'string' && msg.name.length > 0 &&
-        typeof msg.emailcontact === 'string' && msg.emailcontact.length > 0 &&
-        typeof msg.message === 'string' && msg.message.length > 0 &&
-        typeof msg.confirmed === 'boolean' &&
-        typeof msg.timestamp === 'object' && msg.timestamp <= in25Hours
+        typeof usr.username === 'string' && usr.username.length > 0 &&
+        typeof usr.hashedPassword === 'string' && usr.hashedPassword.length > 0 &&
+        typeof usr.permissions === 'array'
     );
 }
 
 
 
-const insertMessage = (item) => {
+const insertUser = (item) => {
     // Try to save the object. 
     // returns the promise
-    return insertItem(item, (x) => new Message.Model(Message.standardiseMessageFields(x)));
+    return insertItem(item, (x) => new User.Model(User.standardiseUserFields(x)));
 }
 
-const updateMessage = (item) => {
+const updateUser = (item) => {
     // Try to save the object. 
     // returns the promise
 
-    var message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
+    var User = mapIdToObjectIdForUpdateOrDelete(User.standardiseUserFields(item));
 
     return new Promise((resolve, reject) => {
-        Message.Model.findOneAndUpdate({ _id: message._id }, message,
+        User.Model.findOneAndUpdate({ _id: User._id }, User,
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -73,13 +69,13 @@ const updateMessage = (item) => {
 
 }
 
-const deleteMessage = (item) => {
+const deleteUser = (item) => {
     // Try to delete the object.
     // returns the promise
 
-    var message = mapIdToObjectIdForUpdateOrDelete(Message.standardiseMessageFields(item));
+    var user = mapIdToObjectIdForUpdateOrDelete(User.standardiseUserFields(item));
     return new Promise((resolve, reject) => {
-        Message.Model.findOneAndDelete({ _id: message._id },
+        User.Model.findOneAndDelete({ _id: user._id },
             (err, obj) => {
                 if (err) reject(err);
                 else resolve(obj);
@@ -106,46 +102,67 @@ const mapObjectIdToId = (args) => {
     }
 }
 
-const getAllMessages = () => {
+const getAllUsers = () => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Message.Model.find().lean().exec((err, results) => {
+        User.Model.find().lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
                 // using the populate here to ensure same order each time
                 resolve(
                     mapObjectIdToId(results)
-                        .map(b => Message.standardiseMessageFields(b))
+                        .map(b => User.standardiseUserFields(b))
                 );
 
         })
     });
 }
 
-const getMessage = (id) => {
+const getUserById = (id) => {
     return new Promise((resolve, reject) => {
         // eslint-disable-next-line array-callback-return
-        Message.Model.find({ _id: ObjectId(id) }).lean().exec((err, results) => {
+        User.Model.findOne({ _id: ObjectId(id) }).lean().exec((err, results) => {
             if (err)
                 reject(err);
             else
-                // using the populate here to ensure same order each time
+                // using the standardise here to ensure same order each time
+                // Null check as user using findOne
                 resolve(
-                    mapObjectIdToId(results)
-                        .map(b => Message.standardiseMessageFields(b))
+                    results !== null 
+                    ?    User.standardiseUserFields(mapObjectIdToId(results))
+                    :   results
                 );
         })
     });
 }
 
+const getUsername = (username)=>{
+    return new Promise((resolve, reject) => {
+        // eslint-disable-next-line array-callback-return
+        User.Model.findOne({ username: username }).lean().exec((err, results) => {
+            if (err)
+                reject(err);
+            else
+                // using the standardise here to ensure same order each time
+                // Null check as user using findOne
+                resolve(
+                    results !== null 
+                    ?    User.standardiseUserFields(mapObjectIdToId(results))
+                    :   results
+                );
+        })
+    });
+}
 
 
 module.exports = {
-    insertMessage,
-    getAllMessages,
-    getMessage,
-    updateMessage,
-    deleteMessage,
-    validateMessage
+    insertUser,
+    getAllUsers, 
+    getUserById,
+    getUsername,
+    updateUser,
+    deleteUser,
+    validateUser,
+    standardiseUserFields:User.standardiseUserFields
 };

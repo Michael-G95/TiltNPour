@@ -7,20 +7,20 @@
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
-
+console.log("** STARTUP: IMPORTS")
 /**
  * Get port from environment and store in Express.
  */
 
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
+console.log("** STARTUP: PORT FOUND")
 /**
  * Create HTTP server.
  */
 
 var server = http.createServer(app);
-
+console.log("** STARTUP: SERVER CREATED")
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -28,7 +28,7 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
-
+console.log("** STARTUP: LISTENING")
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -87,4 +87,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  console.log("** STARTUP: ONLISTENING")
 }

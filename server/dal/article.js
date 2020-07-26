@@ -23,7 +23,7 @@ const getSummaryForArticle = (article)=>{
         date:article.date,
         author:article.author
     }
-}
+} 
 
 const createEmptyObject=standardiseArticleFields;
 

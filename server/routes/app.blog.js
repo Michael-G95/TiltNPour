@@ -41,7 +41,7 @@ router.get('/get/:article', async (req, res, next) => {
         if(article.length > 0){
             article[0].dateString = article[0].date.toLocaleDateString();
             article[0].html = marked(article[0].markdown);
-            const html = await renderFileSafely('_article', {article:article[0]});
+            const html = await renderFileSafely('user/_article', {article:article[0]});
             res.send(html);
         }
         else{

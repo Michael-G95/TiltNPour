@@ -1,0 +1,29 @@
+POST http://localhost:3000/authenticate/adduser 
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+###
+
+
+POST http://localhost:3000/authenticate/login 
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+###
+GET http://localhost:3000/authenticate/whoami
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVmMWRkZTI1Zjk5ODk4NGM5ODJkMjA3YyIsInVzZXJuYW1lIjoiYWRtaW4iLCJoYXNoZWRQYXNzd29yZCI6IiQyYiQxMCQuQXNxbnFUdzZXNERxdlRlTXBWY3VPaXo3N2hzNWhTYjloMWFLL3lkSVNKbDhXUmM2alFldSIsInBlcm1pc3Npb25zIjpbImJhc2ljIl0sImlhdCI6MTU5NTc5NDYzNiwiZXhwIjoxNTk1Nzk0NjY2fQ.K4vLpECJoyQYZESf9rLbdbdo2LKjzbASysMMzCcf60s
+
+###
+POST http://localhost:3000/authenticate/refresh 
+Content-Type: application/json
+
+{
+    "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCfJ9.eyJpZCI6IjVmMWRkZTI1Zjk5ODk4NGM5ODJkMjA3YyIsInVzZXJuYW1lIjoiYWRtaW4iLCJoYXNoZWRQYXNzd29yZCI6IiQyYiQxMCQuQXNxbnFUdzZXNERxdlRlTXBWY3VPaXo3N2hzNWhTYjloMWFLL3lkSVNKbDhXUmM2alFldSIsInBlcm1pc3Npb25zIjpbImJhc2ljIl0sImlhdCI6MTU5NTc5NDYyM30.r8dYbeMjBwG_C-_roOsTA04HrvVQHcrFt_FnO7pSfDo"
+}

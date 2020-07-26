@@ -1,7 +1,7 @@
 var express = require('express');
 var path = require('path');
 var router = express.Router();
-var Article = require('../dal/database.article');
+var Article = require('../../dal/database.article');
 var marked = require('marked');
 
 // Import and setups for rendering and sanitizing 
@@ -12,6 +12,7 @@ const DOMPurify = createDOMPurify(window);
 
 var ejs = require('ejs');
 const e = require('express');
+const checkAuthenticated = require('./checkAuthenticated');
 
 // Helper methods
 var _viewsDir = path.join(__dirname, "..", "views");
@@ -23,15 +24,18 @@ const renderFileSafely = async function (file, arg1) {
     return DOMPurify.sanitize(html);
 }
 
-router.post('/get/preview',async (req,res,next)=>{
-    console.log(req.body);
+router.post('/get/preview', checkAuthenticated , async (req,res,next)=>{
+    
     try{
     var data = req.body;
     data.dateString = new Date().toLocaleDateString();
     data.html = marked(data.markdown);
-    const html = await renderFileSafely('_article', {article:data});
+    console.log("GET PREVIEW: data",data);
+    const html = await renderFileSafely('user/_article', {article:data});
+    console.log("GET PREVIEW: got hml",data);
     htmlPreview = DOMPurify.sanitize(html);
-    res.json({htmlPreview});
+    console.log("GET PREVIEW: sanitized",data);
+    return res.json({htmlPreview});
     }catch(err){
         console.log(err)
         res.status(500).json({error:err});
@@ -46,24 +50,24 @@ const articles = [
     }
 ]
 
-router.get('/', async (req, res, next) => {
+router.get('/', checkAuthenticated, async (req, res, next) => {
     console.log("Loading admin page");
     const articles = await Article.getAllArticles();
-    res.render("admin", { articles });
+    res.render("admin/article/admin_article", { articles });
 })
 
-router.get('/edit/:id', async (req, res, next) => {
+router.get('/edit/:id', checkAuthenticated, async (req, res, next) => {
     console.log("Loading edit page for id");
     const article = await Article.getArticle(req.params.id);
-    res.render("admin_edit_article", { article: article[0] });
+    res.render("admin/article/admin_edit_article", { article: article[0] });
 })
 
 
-router.get('/new', async (req, res, next) => {
-    res.render('admin_new_article');
+router.get('/new', checkAuthenticated, async (req, res, next) => {
+    res.render('admin/article/admin_new_article');
 })
 
-router.post('/new', async (req, res, next) => {
+router.post('/new', checkAuthenticated, async (req, res, next) => {
     // add date
     console.log(req.body);
 
@@ -87,7 +91,7 @@ router.post('/new', async (req, res, next) => {
 
 
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', checkAuthenticated, async (req, res, next) => {
     console.log("Loading id");
     const article = await Article.getArticle(req.params.id);
     console.log(article[0])
@@ -99,7 +103,7 @@ router.get('/:id', async (req, res, next) => {
 
 })
 
-router.post('/edit/:id', async (req, res, next) => {
+router.post('/edit/:id', checkAuthenticated, async (req, res, next) => {
     console.log("Editing for id");
     const article = req.body;
     article.date = new Date();
@@ -128,12 +132,12 @@ router.post('/edit/:id', async (req, res, next) => {
 
 })
 
-router.delete("/:id",async (req,res,next)=>{
+router.delete("/:id", checkAuthenticated,async (req,res,next)=>{
     console.log("Deleting",req.params.id);
     try{
         Article.deleteArticle({id:req.params.id})
         .then(()=>{
-            res.redirect("/admin")
+            res.redirect("/admin/article")
         })
     }
     catch (err){

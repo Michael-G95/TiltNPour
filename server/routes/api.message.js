@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Message = require('../dal/database.message');
-const app = require('../app');
 
 router.post('/new', function (req, res, next) {
 

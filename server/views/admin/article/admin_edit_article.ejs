@@ -44,7 +44,7 @@
             
             <button type="submit" class="btn btn-primary">Save</button>
             
-            <a href="/admin" class="btn btn-secondary">Cancel</a> 
+            <a href="/admin/article" class="btn btn-secondary">Cancel</a> 
 
             <div class="container-fluid mt-3">
                 <h4>Preview</h4>
@@ -81,7 +81,7 @@
                         author:$('#author').val(),
                         markdown:$('#markdown').val()
                     }
-                    $.post("/admin/get/preview",dataPost,markdownUpdateCallback)
+                    $.post("/admin/article/get/preview",dataPost,markdownUpdateCallback)
                 }
                 
                 function markdownUpdateCallback(data,status){           

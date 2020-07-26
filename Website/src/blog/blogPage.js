@@ -13,9 +13,11 @@ const BlogPage = () => {
         getArticleHtml(params.article)
             .then((response) => {
                 setHtml(response.data);
+                console.log("GOT HTML for article")
             })
             .catch((err) => {
                 logger.logError(err);
+                console.log(err);
             })
     }, [params])
 

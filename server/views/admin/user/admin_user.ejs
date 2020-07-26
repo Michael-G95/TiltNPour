@@ -15,22 +15,27 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1 class="mb-1"><%= article.title %></h1>
-        <div class="text-muted mb-2">
-            <%= new Date(article.date).toLocaleDateString() %>
-        </div>
+        <h1>User Management</h1>
+        
+        <p class="text-danger">
+            <%= message %>
+        </p>
+        <a href="new" class="btn btn-secondary">New User</a>
 
-        <div class="container-fluid">
-            <%= article.markdown %>
-        </div>
-        <a href="/admin" class="btn btn-secondary">All Articles</a>
-    
-        <a href="/admin" class="btn btn-info">Edit</a>
-        <a href="/admin" class="btn btn-danger">Delete</a>
-    </div>
+        <% users.forEach(user => { %>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title"><%= user.username %></h4>
+                <form action="/authenticate/<%= user.id %>?_method=DELETE" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-danger">Delete User</button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+
+          <br />
+          <a href="/admin" class="btn btn-secondary">Back</a>
     </div>
 
 </body>
 </html>
-
-<div class="container">
