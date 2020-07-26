@@ -77,7 +77,8 @@ router.post('/login',checkNotAuthenticated, passport.authenticate('local',{
 
 router.delete('/logout', (req,res,next)=>{
     if(req.isAuthenticated()){
-        req.logOut();
+        console.log("Logging out:",req.user.username)
+        req.logout();
     }
     return res.redirect('/');
 })

@@ -14,6 +14,7 @@ if(process.env.NODE_ENV !== 'production'){
 const flash = require('express-flash')
 const session = require('express-session')
 const passport = require('passport');
+var MongoDBStore = require('connect-mongodb-session')(session)
 
 // Routes
 var apiRouter = require('./routes/api');
@@ -43,13 +44,34 @@ global.__basedir = path.resolve(__dirname);
 
 app.use(methodOverride('_method'));
 
+var store = new MongoDBStore({
+  uri: process.env.DATABASE_CONNSTR,
+  collection: 'sessions',
+  unset:'destroy'
+},
+function(error) {
+  console.log("MONGODB_SESSION_ERROR_CTOR:",error);
+});
+store.on('error', function(error) {
+  console.log("MONGODB_SESSION_ON_ERROR:",error);
+});
+
 app.use(flash())
 app.use(session({
-  secret:process.env.SESSION_SECRET,
-  resave:false,
-  saveUninitialized:false
-}))
+  secret: process.env.SESSION_SECRET,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week
+  },
+  //store: store, using in memory for now
+  resave: false,
+  saveUninitialized: false,
+  //unset: 'destroy'
+}));
+ 
 app.use(passport.initialize())
+
+
+
 app.use(passport.session())
 
 
