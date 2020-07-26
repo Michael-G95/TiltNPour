@@ -15,7 +15,7 @@ const e = require('express');
 const checkAuthenticated = require('./checkAuthenticated');
 
 // Helper methods
-var _viewsDir = path.join(__dirname, "..", "views");
+var _viewsDir = path.join(__dirname, "..","..", "views");
 const getView = function (dir) {
     return path.join(_viewsDir, dir + ".ejs");
 }
