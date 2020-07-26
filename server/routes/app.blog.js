@@ -14,7 +14,7 @@ var ejs = require('ejs')
 // Helper methods
 var _viewsDir = path.join(__dirname, "../", "views");
 const getView = function (dir) {
-    return path.join(_viewsDir, "/", dir,".ejs");
+    return path.join(_viewsDir, dir,".ejs");
 }
 const renderFileSafely = async function (file, arg1) {
     const html = (await ejs.renderFile(getView(file), arg1));
@@ -41,7 +41,7 @@ router.get('/get/:article', async (req, res, next) => {
         if(article.length > 0){
             article[0].dateString = article[0].date.toLocaleDateString();
             article[0].html = marked(article[0].markdown);
-            const html = await renderFileSafely('user/_article', {article:article[0]});
+            const html = await renderFileSafely(path.join('user','_article'), {article:article[0]});
             res.send(html);
         }
         else{
