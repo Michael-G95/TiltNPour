@@ -12,7 +12,7 @@ const DOMPurify = createDOMPurify(window);
 var ejs = require('ejs')
 
 // Helper methods
-var _viewsDir = path.join(__dirname, "..", "views");
+var _viewsDir = path.join(__dirname, "../", "views");
 const getView = function (dir) {
     return path.join(_viewsDir, "/", dir,".ejs");
 }
