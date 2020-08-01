@@ -79,6 +79,7 @@ router.delete('/logout', (req,res,next)=>{
     if(req.isAuthenticated()){
         console.log("Logging out:",req.user.username)
         req.logout();
+        req.session = null;
     }
     return res.redirect('/');
 })

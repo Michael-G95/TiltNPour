@@ -1,4 +1,4 @@
-const url = "mongodb+srv://devel:HTCjoVDQBXEH9inZ@cluster0-xrkzw.mongodb.net/tiltnpour?retryWrites=true&w=majority";
+const url = process.env.DATABASE_CONNSTR;
 const mongoose = require('mongoose');
 
 console.log("Connecting...");

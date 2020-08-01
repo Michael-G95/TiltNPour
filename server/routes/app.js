@@ -5,7 +5,7 @@ var router = express.Router();
 
 // Handles any requests that don't match the ones above
 router.get('*', (req,res) =>{
-  res.sendFile(path.join(global.__basedir, "public", "index.html"));
+  res.sendFile(path.join(global.__basedir, "client","build", "index.html"));
 });
  
 module.exports = router;
