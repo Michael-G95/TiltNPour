@@ -42,7 +42,7 @@ const validateMessage= (msg) => {
 
     return (
         typeof msg.name === 'string' && msg.name.length > 0 &&
-        typeof msg.emailcontact === 'string' && msg.emailcontact.length > 0 &&
+        typeof msg.emailContact === 'string' && msg.emailContact.length > 0 &&
         typeof msg.message === 'string' && msg.message.length > 0 &&
         typeof msg.confirmed === 'boolean' &&
         typeof msg.timestamp === 'object' && msg.timestamp <= in25Hours

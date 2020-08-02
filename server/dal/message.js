@@ -4,11 +4,11 @@ const mongoose = require("mongoose");
 // (item)=>new Message.Schema(Message.populateMessageFields(item))
 // This pattern ensures the Brewery object has the required fields, initialised to "" if not present
 
-const standardiseMessageFields = ({id="",name="",emailcontact="",message="",confirmed="",timestamp=""})=>{
+const standardiseMessageFields = ({id="",name="",emailContact="",message="",confirmed="",timestamp=""})=>{
     return {
         id,
         name,
-        emailcontact,
+        emailContact,
         message,
         confirmed,
         timestamp

@@ -35,7 +35,7 @@ function Map(props) {
     }
 
     if(key.length===0){
-        return <div>Loading...</div>
+        return <p className="loading"></p>
     }
 
     return (

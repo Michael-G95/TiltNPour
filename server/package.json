@@ -3,9 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start-dev": "nodemon ./bin/www",
+    "start-dev": "nodemon --ignore client/* ./bin/www",
     "start": "node ./bin/www",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
+    "client-start": "cd client && set PORT=3001 && npm start",
+    "server-start": "npm run start-dev",
+    "start-both": "concurrently --kill-others-on-fail \"npm run client-start\" \"npm run server-start\"",
+    "deploy": "cd .. && git add . &&git commit -m \"Heroku deploy commit\" && git subtree push --prefix server heroku master"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
@@ -26,10 +30,14 @@
     "jsonwebtoken": "^8.5.1",
     "marked": "^1.1.1",
     "method-override": "^3.0.0",
+    "moment": "^2.27.0",
     "mongoose": "^5.9.20",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0"
   }
 }

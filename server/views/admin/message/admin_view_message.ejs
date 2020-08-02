@@ -15,26 +15,25 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1>Admin Home</h1>
-        <h4 class="text-muted mb-5">Logged in as: <%= username %></h4>
-        <div class="container-fluid row mb-3">
-            <a href="admin/article/" class="btn btn-primary">Article Management</a>
-        </div>
-        <div class="container-fluid row mb-3">
-            <a href="admin/user/" class="btn btn-primary">User Management</a>
-        </div>
-        <div class="container-fluid row mb-3">
-            <a href="admin/event/" class="btn btn-primary">Event Management</a>
-        </div>
-        <div class="container-fluid row mb-3">
-            <a href="admin/brewery/" class="btn btn-primary">Brewery Management</a>
-        </div>
-        <div class="container-fluid row mb-3">
-            <a href="admin/message/" class="btn btn-primary">Message Management</a>
-        </div>
-        <form action="/authenticate/logout?_method=DELETE" method="POST" >
-            <button type="submit" class="btn btn-secondary">Log out</button>
-        </form>
+        <h1>View Message</h1>
+            <div class="card mt-4">
+              <div class="card-body">
+                <h4 class="card-title"><%= message.name %></h4>
+                <div class="card-subtitle text-muted mb-2">
+                  <%= new Date(message.timestamp).toLocaleDateString() %>
+                </div>
+                <div class="card-subtitle text-muted mb-2">
+                    <%= message.emailContact %>
+                  </div>
+                <div class="card-text mb-2"><%= message.message %></div>
+                <form action="/admin/message/<%= message.id %>?_method=DELETE" method="POST" class="d-inline">
+                  <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+
+          <br />
+          <a href="/admin/message" class="btn btn-secondary">Back</a>
     </div>
 
 </body>

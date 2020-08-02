@@ -80,7 +80,7 @@ app.use('/api', apiRouter);
 app.use('/blog',blogRouter);
 app.use('/admin',adminRouter);
 app.use('/authenticate',authenticationRouter);
-app.use('*', appRouter);
+app.use('/', appRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -48,9 +48,9 @@ const deleteEvent = (item)=>{
     // Try to delete the object.
     // returns the promise
 
-    var Event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
+    var event = mapIdToObjectIdForUpdateOrDelete(Event.standardiseEventFields(item));
     return new Promise((resolve, reject) => {
-        event.Model.findOneAndDelete({_id:event._id},
+        Event.Model.findOneAndDelete({_id:event._id},
         (err, obj) => {
             if (err) reject(err);
             else resolve(obj);

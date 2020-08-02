@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Header from './header/header';
 import Footer from './footer/footer';
-import './app.css'
 
 import dotenv from 'dotenv'
 import Events from './events/events';

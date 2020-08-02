@@ -32,16 +32,16 @@ router.post('/get/preview', checkAuthenticated , async (req,res,next)=>{
     data.html = marked(data.markdown);
     console.log("GET PREVIEW: data",data);
     const html = await renderFileSafely(path.join('user','_article'), {article:data});
-    console.log("GET PREVIEW: got html",data);
+    console.log("GET PREVIEW: got html",html);
     htmlPreview = DOMPurify.sanitize(html);
-    console.log("GET PREVIEW: sanitized",data);
-    return res.json({htmlPreview});
+    console.log("GET PREVIEW: sanitized",htmlPreview);
+    return res.json({htmlPreview:html});
     }catch(err){
         console.log(err)
         res.status(500).json({error:err});
     }
 })
-
+ 
 const articles = [
     {
         title: "Title",
@@ -114,7 +114,7 @@ router.post('/edit/:id', checkAuthenticated, async (req, res, next) => {
         try {
             Article.updateArticle(article)
                 .then(() => {
-                    res.redirect('/blog/' + article.id);
+                    res.redirect('/admin/article');
                 })
                 .catch((err) => {
                     console.log("Caught in .catch")

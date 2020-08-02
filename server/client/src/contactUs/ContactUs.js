@@ -41,7 +41,7 @@ const ContactUs = () => {
 
         const message = {
             name: nameValue.length > 0 ? nameValue : "Anonymous",
-            emailcontact: emailValue.length > 0 ? emailValue : "No email contact",
+            emailContact: emailValue.length > 0 ? emailValue : "No email contact",
             message: messageValue,
             timestamp: new Date().toString(),
             confirmed: confirmedValue

@@ -26,7 +26,7 @@ const MonthEvents = (props)=>{
 
     if(events.length === 0)
         return (
-            <p>Loading...</p>
+            <p className="loading"></p>
         )
 
     // Have the events data

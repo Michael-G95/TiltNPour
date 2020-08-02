@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getArticleHtml } from '../dal/dataService';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import logger from '../dal/logger';
-import './blogCss.css'
 
 const BlogPage = () => {
     const [html, setHtml] = useState("");
@@ -23,7 +22,7 @@ const BlogPage = () => {
 
 
     if (html.length === 0) {
-        return <p>Loading...</p>
+        return <p className="loading"></p>
     }
 
     //dangerouslySetInnerHTML={{__html:(html)}}
@@ -34,6 +33,7 @@ const BlogPage = () => {
             >
 
             </div>
+            <Link class="btn btn-secondary ml-3" to="/blog">Back</Link>
         </main>
     )
 }

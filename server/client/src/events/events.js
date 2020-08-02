@@ -15,7 +15,8 @@ const Events = () => {
         .then((response)=>{
             var eventsData = response.data
             var orderedEvents = eventsData.sort((a, b) => b.date - a.date)
-            setEvents(orderedEvents.slice(0,4));
+            var orderedFutureEvents = orderedEvents.filter(e=>new Date(e.date) > new Date())
+            setEvents(orderedFutureEvents.slice(0,4));
         })
         .catch((err)=>{
             logger.logError(err);

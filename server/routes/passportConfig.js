@@ -39,7 +39,7 @@ const authenticateUser = async (username,password,done) => {
     // No user found - return
     if(user === null || user === undefined){
         console.log("No user found")
-        return done(null,false,{message:"No user for provided username"});
+        return done(null,false,{message:"Username or password incorrect"});
     }
 
     try {
@@ -50,7 +50,7 @@ const authenticateUser = async (username,password,done) => {
         }else{
             console.log("Auth FAIL")
             // Bad password
-            return done(null,false,{message:"Password incorrect"})
+            return done(null,false,{message:"Username or password incorrect"})
         }
     } catch (error) {
         done(error);

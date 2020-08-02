@@ -8,7 +8,7 @@ const BlogSummary = ({article}) => {
         history.push("/blog/"+article.id);
     }
     return (
-        <div className="card mt-4 col-10 col-md-5 mx-2 mx-auto" onClick={handleOnClick}>
+        <div className="card mt-4 col-10 col-md-5 mx-2 blog-article" onClick={handleOnClick}>
             <div className="card-body">
                 <h4 className="card-title">{article.title}</h4>
                 <div className="card-subtitle text-muted mb-1">

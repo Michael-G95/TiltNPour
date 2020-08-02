@@ -1,7 +1,12 @@
-body, main {
+body, main, .preview {
   padding: 0 !important;
   background-color: transparent;
   font-family: Oxygen, sans-serif !important;
+}
+
+main#root{
+  /* Covers the navbar fixed-top overlap */  
+  padding-top: 100px !important;
 }
 
 .navbar {
@@ -138,6 +143,16 @@ footer {
   padding-top: 100%;
 }
 
+.brewery-list-item :hover {
+  background-color: lightgray !important;
+  border-radius: 5px;
+}
+
+.brewery-list-item {
+  border-radius: 5px;
+}
+/*# sourceMappingURL=app.css.map */
+
 @media (max-width: 767.98px) {
   #footer-links {
     margin-left: 25% !important;
@@ -145,4 +160,10 @@ footer {
     text-align: center;
   }
 }
+
+.loading{
+  margin-bottom: 1000px;
+}
+
+
 /*# sourceMappingURL=common.css.map */

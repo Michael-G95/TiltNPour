@@ -17,6 +17,7 @@
     <div class="container-fluid">
         <h1>Article Management</h1>
         <a href="new" class="btn btn-secondary">New Article</a>
+        <% if(articles.length===0) { %> <h2 class="text-danger">No articles</h2> <% } %>
         <% articles.forEach(article => { %>
             <div class="card mt-4">
               <div class="card-body">

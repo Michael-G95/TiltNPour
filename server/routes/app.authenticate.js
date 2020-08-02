@@ -19,7 +19,6 @@ router.get('/whoami', checkAuthenticated, (req, res, next) => {
 
 router.post('/adduser', checkAuthenticated, async (req, res, next) => {
     // Authenticate user has this permission
-    console.log('adduser');
     try {
         // Check for existing user
         const user = await User.getUsername(req.body.username)
@@ -35,7 +34,6 @@ router.post('/adduser', checkAuthenticated, async (req, res, next) => {
         const salt = await bcrypt.genSalt();
         // Hash password using bcrypt with salt
         const hashedPassword = await bcrypt.hash(req.body.password, salt);
-        console.log(hashedPassword)
         // Initial permissions "basic"
 
         await User.insertUser({

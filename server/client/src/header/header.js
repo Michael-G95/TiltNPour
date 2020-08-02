@@ -5,7 +5,7 @@ import inlogo from './res/instagram.png';
 import twlogo from './res/twitter.png'
 const Header = ()=>{
     return (
-        <nav className="navbar navbar-expand-md navbar-dark">
+        <nav className="navbar navbar-expand-md navbar-dark fixed-top">
 
         <div className="navbar-collapse collapse w-100 dual-collapse2 order-1 order-md-0">
             <ul className="navbar-nav ml-auto text-center ">
