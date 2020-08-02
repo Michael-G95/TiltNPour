@@ -9,7 +9,7 @@
     "client-start": "cd client && set PORT=3001 && npm start",
     "server-start": "npm run start-dev",
     "start-both": "concurrently --kill-others-on-fail \"npm run client-start\" \"npm run server-start\"",
-    "deploy": "cd .. && git add . &&git commit -m \"Heroku deploy commit\" && git subtree push --prefix server heroku master"
+    "deploy": "cd .. && git add . && git commit -m \"Heroku deploy commit\" && git subtree push --prefix server heroku master"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

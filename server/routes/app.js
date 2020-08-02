@@ -22,7 +22,6 @@ router.get('/adm/css/blog',(req,res)=>{
   res.sendFile(path.join(global.__basedir, "client","public", "css", "blog.css"));
 })
 
-
 // Handles any requests that don't match the ones above - serve react frontent
 router.get('*', (req,res) =>{
   res.sendFile(path.join(global.__basedir, "client","build", "index.html"));
